@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std; 
+
+int main() {
+    double datos[100]; 
+    int N; 
+
+    cout << "Ingrese la cantidad de elementos: "; cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+
+    cout << "Ingrese los elementos:\n";
+    for (int i = 0; i < N; i++) {
+        cout << "Elemento [" << i << "]: "; cin >> datos[i];
+    }
+    
+    for (int i = 0; i < N - 1; i++) { 
+        for (int j = 0; j < N - 1 - i; ++j) { 
+            if (datos[j] > datos[j + 1]) { 
+                // 3. Intercambio (Swap) para poner el menor adelante
+                double temp = datos[j];   // 1. Guardar el valor mayor temporalmente
+                datos[j] = datos[j + 1];  // 2. Poner el valor menor en la posición actual
+                datos[j + 1] = temp;      // 3. Poner el valor mayor en la posición siguiente
+            }
+        }
+    }
+
+    cout << "\n El arreglo ordenado de manera ascendente: ";
+    for (int i = 0; i < N; ++i) {
+        cout << datos[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
