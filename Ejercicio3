@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double datos[100]; 
+    int N; 
+
+    cout << "Ingrese la cantidad de elementos: ";
+    cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+
+    cout << "Ingrese los " << N << " elementos:\n";
+    for (int i = 0; i < N; i++) {
+        cout << "Elemento [" << i << "]: ";
+        cin >> datos[i];
+    }
+    
+    double suma = 0.0;
+    
+    for (int i = 0; i < N; i++) {
+        suma += datos[i];
+    }
+
+    double promedio = suma / N; 
+
+    cout << "\nLa suma de los elementos es: " << suma << endl;
+    cout << "El promedio de los valores es: " << promedio << endl;
+
+    return 0;
+}
