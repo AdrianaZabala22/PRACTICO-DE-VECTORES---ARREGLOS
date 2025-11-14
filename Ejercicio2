@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int datos[100]; 
+    int N, i;
+
+    cout << "Ingrese la cantidad de elementos: "; cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+    cout << "Digite los numeros:\n";
+    for (i = 0; i < N; i++) {
+        cout << "Elemento [" << i << "]: "; cin >> datos[i];
+    }
+ 
+    int minimo = datos[0];
+    for (i = 1; i < N; i++) {
+        if (datos[i] < minimo) {
+            minimo = datos[i];
+        }
+    }
+    cout << "\n El valor minimo del arreglo es: " << minimo << endl;
+
+    return 0;
+}
