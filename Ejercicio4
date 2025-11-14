@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int original[100]; 
+    int revertido[100];
+    int N; 
+
+    cout << "Ingrese la cantidad de elementos: ";
+    cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+
+    cout << "Ingrese los " << N << " elementos:\n";
+    for (int i = 0; i < N; ++i) {
+        cout << "Elemento [" << i << "]: ";
+        cin >> original[i];
+    }
+
+    // j es el índice del arreglo 'revertido' (de 0 a N-1)
+    int j = 0; 
+    for (int i = N - 1; i >= 0; --i) {
+        // 2. Asignar el elemento original[i] (final) al revertido[j] (inicio)
+        revertido[j] = original[i];
+        j++; // Avanzamos el índice del arreglo revertido
+    }
+
+    cout << "\nVector Original: ";
+    for (int i = 0; i < N; ++i) cout << original[i] << " ";
+    
+    cout << "\nVector Revertido: ";
+    for (int i = 0; i < N; ++i) cout << revertido[i] << " ";
+    cout << endl;
+
+    return 0;
+}
