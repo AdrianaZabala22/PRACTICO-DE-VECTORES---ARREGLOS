@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+using namespace std; 
+
+const int MAX_SIZE = 100;
+
+int main() {
+    string alumnos[100]; 
+    double notas[100];
+    int N; 
+
+    cout << "Ingrese la cantidad de alumnos: "; cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+
+    cout << "Ingrese los alumnos y sus notas:\n";
+    for (int i = 0; i < N; i++) {
+        cout << "Alumno [" << i + 1 << "]: "; cin >> alumnos[i];
+        cout << "Nota de " << alumnos[i] << ": "; cin >> notas[i];
+    }
+    
+    // 1. Ordenamiento por el Metodo de la Burbuja (Orden Descendente)
+    // El objetivo es ordenar 'notas' de MAYOR a MENOR.
+    for (int i = 0; i < N - 1; i++) { 
+        for (int j = 0; j < N - 1 - i; j++) { 
+            // 2. Condición: Si el actual es MENOR que el siguiente (orden descendente)
+            if (notas[j] < notas[j + 1]) { 
+                
+                double temp_nota = notas[j];
+                notas[j] = notas[j + 1];
+                notas[j + 1] = temp_nota;
+                
+                string temp_alumno = alumnos[j];
+                alumnos[j] = alumnos[j + 1];
+                alumnos[j + 1] = temp_alumno;
+            }
+        }
+    }
+
+    // 5. Mostrar los tres primeros (los de mayor nota)
+    cout << "\n--- TOP 3 ALUMNOS ---" << endl;
+    
+    int limite = (N > 3) ? 3 : N; 
+    
+    for (int i = 0; i < limite; i++) {
+        cout << i + 1 << ". " << alumnos[i] << " (Nota: " << notas[i] << ")" << endl;
+    }
+
+    return 0;
+}
