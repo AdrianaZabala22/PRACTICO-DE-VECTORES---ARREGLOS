@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std; 
+
+int main() {
+    int original[100];
+    int N_original; // Cantidad de elementos del arreglo original
+    int sin_duplicados[100];
+    int N_nuevo = 0; // Contador de elementos únicos en el nuevo arreglo
+
+    cout << "Ingrese la cantidad de elementos: "; cin >> N_original;
+
+    if (N_original <= 0 || N_original > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+    cout << "Ingrese los elementos (enteros):\n";
+    for (int i = 0; i < N_original; i++) {
+        cout << "Elemento [" << i << "]: "; cin >> original[i];
+    }
+    // Lógica para eliminar duplicados
+    for (int i = 0; i < N_original; i++) {
+        bool es_duplicado = false;
+        
+        // 1. Buscamos si el elemento actual (original[i]) ya existe en 'sin_duplicados'
+        for (int j = 0; j < N_nuevo; j++) {
+            // Recorremos solo los elementos que ya hemos agregado (N_nuevo)
+            if (original[i] == sin_duplicados[j]) {
+                es_duplicado = true;
+                break; // Encontramos un duplicado, no necesitamos seguir buscando
+            }
+        }
+
+        if (!es_duplicado) {
+            sin_duplicados[N_nuevo] = original[i];
+            N_nuevo++; // Incrementamos el contador de elementos únicos
+        }
+    }
+    cout << "\nArreglo original: ";
+    for (int i = 0; i < N_original; ++i) cout << original[i] << " ";
+
+    cout << "\nArreglo sin duplicados: ";
+    for (int i = 0; i < N_nuevo; ++i) cout << sin_duplicados[i] << " ";
+    cout << endl;
+    return 0;
+}
