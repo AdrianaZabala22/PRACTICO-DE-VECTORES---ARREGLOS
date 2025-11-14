@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double datos[100]; 
+    int N; 
+    
+    if (N < 2 || N > 100) {
+        cout << "Tamaño invalido. Se necesitan al menos 2 elementos.\n";
+        return 1; 
+    }
+
+    // 1. Inicializar la diferencia máxima con la primera diferencia
+    // abs() calcula el valor absoluto: |A[1] - A[0]|
+    double max_diferencia = abs(datos[1] - datos[0]);
+    int indice_inicio = 0; // Índice donde comienza la máxima diferencia
+
+    // 2. Recorrer el arreglo hasta el penúltimo elemento (N - 2)
+    for (int i = 1; i < N - 1; ++i) {
+        // 3. Calcular la diferencia actual
+        double diferencia_actual = abs(datos[i+1] - datos[i]);
+        
+        // 4. Comparar y actualizar el máximo
+        if (diferencia_actual > max_diferencia) {
+            max_diferencia = diferencia_actual;
+            indice_inicio = i;
+        }
+    }
+
+    cout << "\nLa diferencia mas grande es: " << max_diferencia << endl;
+    cout << "Ocurre entre los elementos datos[" << indice_inicio << "] y datos[" << indice_inicio + 1 << "]." << endl;
+
+    return 0;
+}
