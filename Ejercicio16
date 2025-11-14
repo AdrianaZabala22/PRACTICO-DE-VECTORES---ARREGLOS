@@ -1,0 +1,138 @@
+#include <iostream>
+#include <string>  // Para usar cadenas de texto (nombres)
+#include <limits>  // Para limpiar el buffer de entrada
+#include <algorithm> // Necesario para 'swap' si no lo hacemos manualmente
+using namespace std;
+
+const int MAX_SIZE = 100;
+
+// Variables globales para el estado del programa (Arreglos paralelos)
+string alumnos[MAX_SIZE]; 
+double notas[MAX_SIZE];
+int N = 0; // El tamaño actual del arreglo
+
+// --- 1. Ingresar un alumno y su nota ---
+void ingresar_alumno() {
+    if (N >= MAX_SIZE) {
+        cout << "\nERROR: El arreglo de alumnos esta lleno.\n";
+        return;
+    }
+    cout << "\n--- Ingreso de Nuevo Alumno ---" << endl;
+    cout << "Ingrese nombre del alumno: ";
+    // Usamos getline para aceptar nombres con espacios si es necesario
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar buffer
+    getline(cin, alumnos[N]);
+    
+    cout << "Ingrese nota de " << alumnos[N] << ": ";
+    cin >> notas[N];
+    
+    N++;
+    cout << "Alumno registrado con exito. Total de alumnos: " << N << endl;
+}
+
+// --- 2. Listar los alumnos (con su nota) ---
+void listar_alumnos() {
+    if (N == 0) {
+        cout << "\nNo hay alumnos registrados.\n";
+        return;
+    }
+    cout << "\n--- Lista de Alumnos (" << N << ") ---" << endl;
+    for (int i = 0; i < N; ++i) {
+        cout << i + 1 << ". " << alumnos[i] << " (Nota: " << notas[i] << ")" << endl;
+    }
+}
+
+// --- 3. Ordenar alfabéticamente (Requiere ordenar notas en paralelo) ---
+void ordenar_alfabeticamente() {
+    if (N == 0) {
+        cout << "\nNo hay datos para ordenar.\n";
+        return;
+    }
+    // Algoritmo Bubble Sort adaptado para strings, moviendo el array 'notas'
+    for (int i = 0; i < N - 1; ++i) { 
+        for (int j = 0; j < N - 1 - i; ++j) { 
+            // Comparar si el alumno actual es ALFABÉTICAMENTE MAYOR que el siguiente
+            if (alumnos[j] > alumnos[j + 1]) { 
+                // Intercambio de NOMBRES
+                string temp_alumno = alumnos[j];
+                alumnos[j] = alumnos[j + 1];
+                alumnos[j + 1] = temp_alumno;
+                
+                // Intercambio PARALELO de NOTAS
+                double temp_nota = notas[j];
+                notas[j] = notas[j + 1];
+                notas[j + 1] = temp_nota;
+            }
+        }
+    }
+    cout << "\nLista ordenada alfabeticamente.\n";
+}
+
+// --- 4. Sacar la mejor nota (Máximo) ---
+void sacar_mejor_nota() {
+    if (N == 0) {
+        cout << "\nNo hay notas para evaluar.\n";
+        return;
+    }
+    double mejor_nota = notas[0];
+    string mejor_alumno = alumnos[0];
+    
+    for (int i = 1; i < N; ++i) {
+        if (notas[i] > mejor_nota) {
+            mejor_nota = notas[i];
+            mejor_alumno = alumnos[i];
+        }
+    }
+    cout << "\n--- Mejor Nota ---" << endl;
+    cout << "La mejor nota es: " << mejor_nota << " (Alumno: " << mejor_alumno << ")" << endl;
+}
+
+// --- 5. Sacar el promedio de notas ---
+void sacar_promedio_notas() {
+    if (N == 0) {
+        cout << "\nNo hay notas para promediar.\n";
+        return;
+    }
+    double suma = 0.0;
+    for (int i = 0; i < N; ++i) {
+        suma += notas[i];
+    }
+    double promedio = suma / N;
+    
+    cout << "\n--- Promedio de Notas ---" << endl;
+    cout << "El promedio de notas de los " << N << " alumnos es: " << promedio << endl;
+}
+
+
+int main() {
+    int opcion;
+    do {
+        cout << "\n========================================" << endl;
+        cout << "         GESTION DE ALUMNOS (v2)        " << endl;
+        cout << "========================================" << endl;
+        cout << "1. Ingresar un alumno y su nota" << endl;
+        cout << "2. Listar los alumnos y sus notas" << endl;
+        cout << "3. Ordenar alfabeticamente" << endl;
+        cout << "4. Sacar la mejor nota (Maximo)" << endl;
+        cout << "5. Sacar el promedio de notas" << endl;
+        cout << "6. Salir" << endl;
+        cout << "----------------------------------------" << endl;
+        cout << "Seleccione una opcion: ";
+        if (!(cin >> opcion)) { // Manejo de error para entradas no numéricas
+            cout << "Entrada invalida. Saliendo..." << endl;
+            break;
+        }
+
+        switch (opcion) {
+            case 1: ingresar_alumno(); break;
+            case 2: listar_alumnos(); break;
+            case 3: ordenar_alfabeticamente(); break;
+            case 4: sacar_mejor_nota(); break;
+            case 5: sacar_promedio_notas(); break;
+            case 6: cout << "Saliendo del programa. ¡Hasta pronto!" << endl; break;
+            default: cout << "Opcion invalida. Intente de nuevo." << endl;
+        }
+    } while (opcion != 6);
+
+    return 0;
+}
