@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std; 
+
+int main() {
+    double datos[100]; 
+    int N; 
+
+    cout << "Ingrese la cantidad de elementos: ";cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cout << "Tamaño invalido.\n";
+        return 1; 
+    }
+    cout << "Ingrese los " << N << " elementos:\n";
+    for (int i = 0; i < N; i++) {
+        cout << "Elemento [" << i << "]: "; cin >> datos[i];
+    }
+    bool es_capicua = true; 
+
+    for (int i = 0; i < N / 2; ++i) {
+        if (datos[i] != datos[N - 1 - i]) {
+            es_capicua = false;
+            break;             
+        }
+    }
+    cout << "\nResultado: ";
+    if (es_capicua) {
+        cout << "El arreglo ES capicua." << endl;
+    } else {
+        cout << "El arreglo NO es capicua." << endl;
+    }
+
+    return 0;
+}
