@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double datos[100]; 
+    int N; 
+
+    int positivos = 0;
+    int negativos = 0;
+    int ceros = 0;
+
+    for (int i = 0; i < N; ++i) {
+        if (datos[i] > 0) {
+            positivos++;
+        } else if (datos[i] < 0) {
+            negativos++;
+        } else { // Si no es ni mayor ni menor que cero, es cero
+            ceros++;
+        }
+    }
+
+    cout << "\nEstadisticas de los valores:" << endl;
+    cout << "Numeros Positivos: " << positivos << endl;
+    cout << "Numeros Negativos: " << negativos << endl;
+    cout << "Ceros encontrados: " << ceros << endl;
+
+    return 0;
+}
